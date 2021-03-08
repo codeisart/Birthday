@@ -168,9 +168,6 @@ int main()
 
 	Date date = {day,month,year};
 	DOW d = CalculateDOW(date);
-	//cout << "DeltaDays=" << DeltaDays << endl;
-	//cout << "DeltaDays Mod 7=" << DeltaMod7 << endl;
-	//cout << "Result=" << ToString(static_cast<DOW>(DeltaMod7)) << endl;
 	cout << "Day of week is: " << ToString(d) << endl;
     }
 
