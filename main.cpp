@@ -128,11 +128,9 @@ constexpr int64_t absint(int64_t x) { return x < 0 ? -x : x; }
 constexpr DOW CalculateDOW(Date d)
 {
     int64_t DeltaDays = d.DeltaJulianDays(KnownSunday);
-    int64_t AbsDelta = absint(DeltaDays); 
-
-    int Dow = DeltaDays % 7;
-
-    return static_cast<DOW>(Dow);
+    int DeltaMod7 = DeltaDays%7;
+    if(DeltaMod7 < 0) DeltaMod7+=7;
+    return static_cast<DOW>(DeltaMod7);
 }
 
 static_assert(KnownSunday.DeltaJulianDays(KnownSunday) == 0,"Diff of same is 0");
@@ -170,13 +168,10 @@ int main()
 
 	Date date = {day,month,year};
 	DOW d = CalculateDOW(date);
-	int64_t DeltaDays = date.DeltaJulianDays(KnownSunday);
-	int DeltaMod7 = DeltaDays%7;
-	if(DeltaMod7 < 0) DeltaMod7+=7;
 	//cout << "DeltaDays=" << DeltaDays << endl;
 	//cout << "DeltaDays Mod 7=" << DeltaMod7 << endl;
 	//cout << "Result=" << ToString(static_cast<DOW>(DeltaMod7)) << endl;
-	cout << "Day of week is: " << ToString(static_cast<DOW>(DeltaMod7))<< endl;
+	cout << "Day of week is: " << ToString(d) << endl;
     }
 
     return 0;
