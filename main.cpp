@@ -143,20 +143,20 @@ static_assert((KnownSunday+4).DeltaJulianDays(KnownSunday) == 4,"Diff of same is
 static_assert((KnownSunday+5).DeltaJulianDays(KnownSunday) == 5,"Diff of same is 5");
 static_assert((KnownSunday+6).DeltaJulianDays(KnownSunday) == 6,"Diff of same is 6");
 
-static_assert((KnownSunday-1).DeltaJulianDays(KnownSunday) == -1,"Diff of same is 1");
-static_assert((KnownSunday-2).DeltaJulianDays(KnownSunday) == -2,"Diff of same is 2");
-static_assert((KnownSunday-3).DeltaJulianDays(KnownSunday) == -3,"Diff of same is 3");
-static_assert((KnownSunday-4).DeltaJulianDays(KnownSunday) == -4,"Diff of same is 4");
-static_assert((KnownSunday-5).DeltaJulianDays(KnownSunday) == -5,"Diff of same is 5");
-static_assert((KnownSunday-6).DeltaJulianDays(KnownSunday) == -6,"Diff of same is 6");
+static_assert((KnownSunday-1).DeltaJulianDays(KnownSunday) == -1,"Diff of same is -1");
+static_assert((KnownSunday-2).DeltaJulianDays(KnownSunday) == -2,"Diff of same is -2");
+static_assert((KnownSunday-3).DeltaJulianDays(KnownSunday) == -3,"Diff of same is -3");
+static_assert((KnownSunday-4).DeltaJulianDays(KnownSunday) == -4,"Diff of same is -4");
+static_assert((KnownSunday-5).DeltaJulianDays(KnownSunday) == -5,"Diff of same is -5");
+static_assert((KnownSunday-6).DeltaJulianDays(KnownSunday) == -6,"Diff of same is -6");
 
 int main()
 {
     string s;
-    cout << "Enter Birthday (yyyy/mm/dd)" << endl;
+    cout << "Enter Birthday (yyyy-mm-dd)" << endl;
     cin >> s;
 
-    regex date_re("([12]\\d{3})-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])");
+    regex date_re("(\\d{4})-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])");
     smatch match; 
     regex_match(s,match,date_re);
     
@@ -170,13 +170,13 @@ int main()
 
 	Date date = {day,month,year};
 	DOW d = CalculateDOW(date);
-	//cout << "Day of week is: " << ToString(d) << endl;
 	int64_t DeltaDays = date.DeltaJulianDays(KnownSunday);
 	int DeltaMod7 = DeltaDays%7;
 	if(DeltaMod7 < 0) DeltaMod7+=7;
-	cout << "DeltaDays=" << DeltaDays << endl;
-	cout << "DeltaDays Mod 7=" << DeltaMod7 << endl;
-	cout << "Result=" << ToString(static_cast<DOW>(DeltaMod7)) << endl;
+	//cout << "DeltaDays=" << DeltaDays << endl;
+	//cout << "DeltaDays Mod 7=" << DeltaMod7 << endl;
+	//cout << "Result=" << ToString(static_cast<DOW>(DeltaMod7)) << endl;
+	cout << "Day of week is: " << ToString(static_cast<DOW>(DeltaMod7))<< endl;
     }
 
     return 0;
